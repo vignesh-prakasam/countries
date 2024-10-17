@@ -1,7 +1,6 @@
 import { useState } from "react";
 import "./App.css";
 import data from "./data.json";
-import Country from "./Country";
 function App() {
   const [countries, setCountries] = useState([data]);
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -62,7 +61,7 @@ function App() {
             return (
               <div
                 key={index}
-                className="bg-very-dark-blue rounded-md shadow-md "
+                className="bg-very-dark-blue rounded-md shadow-md mb-5"
               >
                 <img
                   src={country.flag}

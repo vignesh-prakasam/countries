@@ -1,25 +1,33 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 import data from "./data.json";
+import iconArrow from "./assets/images/icon-down-arrow.svg";
 function App() {
   const [countries, setCountries] = useState([data]);
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [showRegion, setShowRegion] = useState(false);
+  const [currentRegion, setCurrentRegion] = useState('Filter by Region');
 
   const filterCountry = (e) => {
     const filter = e.target.value;
+    setCurrentRegion('Filter by Region');
     const filteredCountries = data.filter((country) =>
       country.name.toLowerCase().startsWith(filter.toLowerCase())
     );
     setCountries([filteredCountries]);
   };
 
-  const filterRegion = (e) => {
-    const filter = e.target.value;
+  const filterRegion = () => {
+    const filter = currentRegion == 'Filter by Region' ? '' : (currentRegion == 'America' ? 'Americas' : currentRegion);
     const filteredCountries = data.filter(
-      (country) => country.region === filter
+      (country) => ((country.region === filter) || filter === '') 
     );
     setCountries([filteredCountries]);
-  }
+  };
+
+  useEffect(() => {
+    filterRegion();
+  },[currentRegion])
 
   return (
     <>
@@ -42,18 +50,21 @@ function App() {
             placeholder="Search for a country"
             onKeyDown={filterCountry}
           />
-          <select
-            name="filter"
-            id=""
-            className="my-10 w-80 h-14 bg-very-dark-blue text-white"
-            onChange={filterRegion}
-          >
-            <option value="Africa">Africa</option>
-            <option value="Americas">America</option>
-            <option value="Asia">Asia</option>
-            <option value="Europe">Europe</option>
-            <option value="Oceania">Oceania</option>
-          </select>
+          <div onClick={() => setShowRegion(!showRegion)}  className="relative bg-very-dark-blue rounded-md p-5 w-60 h-14 my-10 flex items-center justify-between cursor-pointer">
+            <h1 className="text-white font-semibold">{currentRegion}</h1>
+            <img src={iconArrow} className="size-5" alt="arrow" style={{ filter: 'invert(1)' }} />
+            
+            <div className={`${showRegion ? '' : 'hidden'} absolute top-5 left-0  text-white rounded-lg my-10 bg-very-dark-blue w-60`}>
+              <ul className="py-2 px-2 cursor-pointer ">
+                <li className="py-2 pl-2 hover:bg-very-dark-blue-bg" onClick={() => setCurrentRegion("Africa")}>Africa</li>
+                <li className="py-2 pl-2 hover:bg-very-dark-blue-bg" onClick={() => setCurrentRegion("America")}>America</li>
+                <li className="py-2 pl-2 hover:bg-very-dark-blue-bg" onClick={() => setCurrentRegion("Asia")}>Asia</li>
+                <li className="py-2 pl-2 hover:bg-very-dark-blue-bg" onClick={() => setCurrentRegion("Europe")}>Europe</li>
+                <li className="py-2 pl-2 hover:bg-very-dark-blue-bg" onClick={() => setCurrentRegion("Oceania")}>Oceania</li>
+              </ul>
+            </div>
+          </div>
+
         </div>
         {/* countries */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-20">

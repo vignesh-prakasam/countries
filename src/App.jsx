@@ -50,17 +50,17 @@ function App() {
             placeholder="Search for a country"
             onKeyDown={filterCountry}
           />
-          <div onClick={() => setShowRegion(!showRegion)}  className="relative bg-very-dark-blue rounded-md p-5 w-60 h-14 my-10 flex items-center justify-between cursor-pointer">
+           <div onClick={() => setShowRegion(!showRegion)}  className="relative bg-very-dark-blue rounded-md p-5 w-60 h-14 my-10 flex items-center justify-between cursor-pointer">
             <h1 className="text-white font-semibold">{currentRegion}</h1>
-            <img src={iconArrow} className="size-5" alt="arrow" style={{ filter: 'invert(1)' }} />
+            <img src={iconArrow} className={`size-5 ${ showRegion ? 'rotate-180' : ''}`} alt="arrow" style={{ filter: 'invert(1)', transition: 'transform 0.2s ease' }} />
             
             <div className={`${showRegion ? '' : 'hidden'} absolute top-5 left-0  text-white rounded-lg my-10 bg-very-dark-blue w-60`}>
-              <ul className="py-2 px-2 cursor-pointer ">
-                <li className="py-2 pl-2 hover:bg-very-dark-blue-bg" onClick={() => setCurrentRegion("Africa")}>Africa</li>
-                <li className="py-2 pl-2 hover:bg-very-dark-blue-bg" onClick={() => setCurrentRegion("America")}>America</li>
-                <li className="py-2 pl-2 hover:bg-very-dark-blue-bg" onClick={() => setCurrentRegion("Asia")}>Asia</li>
-                <li className="py-2 pl-2 hover:bg-very-dark-blue-bg" onClick={() => setCurrentRegion("Europe")}>Europe</li>
-                <li className="py-2 pl-2 hover:bg-very-dark-blue-bg" onClick={() => setCurrentRegion("Oceania")}>Oceania</li>
+              <ul className="pt-2  cursor-pointer ">
+                <li className="py-2 pl-4 hover:bg-very-dark-blue-bg" onClick={() => setCurrentRegion("Africa")}>Africa</li>
+                <li className="py-2 pl-4 hover:bg-very-dark-blue-bg" onClick={() => setCurrentRegion("America")}>America</li>
+                <li className="py-2 pl-4 hover:bg-very-dark-blue-bg" onClick={() => setCurrentRegion("Asia")}>Asia</li>
+                <li className="py-2 pl-4 hover:bg-very-dark-blue-bg" onClick={() => setCurrentRegion("Europe")}>Europe</li>
+                <li className="py-2 pl-4 hover:bg-very-dark-blue-bg hover:rounded-b-lg" onClick={() => setCurrentRegion("Oceania")}>Oceania</li>
               </ul>
             </div>
           </div>

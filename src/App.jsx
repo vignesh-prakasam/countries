@@ -35,32 +35,34 @@ function App() {
         <h1 className="text-2xl text-white font-bold ml-5">
           Where in the world?
         </h1>
-        <h1 className="text-md text-white font-semibold mr-5">
-          {isDarkMode ? "Light Mode" : "Dark Mode"}
-        </h1>
+        <button onClick={() => {setIsDarkMode(!isDarkMode)}} className="text-md text-white font-semibold mr-5"> { isDarkMode ? "Light Mode" : "Dark Mode" }</button>
       </header>
-      <main className="bg-very-dark-blue-bg w-full  min-h-screen px-10">
+      <main className={`${isDarkMode ? 'bg-very-dark-blue-bg': 'bg-very-light-gray'}  w-full  min-h-screen px-10`}>
         {/* filters */}
         <div className="flex sm:flex-row flex-col sm:justify-between justify-start sm:mb-0">
           <input
             type="text"
             name="country"
             id="country"
-            className=" mt-10 h-14 sm:w-96 w-full rounded-md pl-10 bg-very-dark-blue text-white"
+            className={`shadow-lg mt-10 h-14 sm:w-96 w-full rounded-md pl-10 ${isDarkMode ? 'bg-very-dark-blue' : 'text-very-dark-blue-text'}`}
             placeholder="Search for a country"
             onKeyDown={filterCountry}
           />
-          <div onClick={() => setShowRegion(!showRegion)}  className="relative bg-very-dark-blue rounded-md p-5 w-60 h-14 my-10 flex items-center justify-between cursor-pointer">
-            <h1 className="text-white font-semibold">{currentRegion}</h1>
-            <img src={iconArrow} className="size-5" alt="arrow" style={{ filter: 'invert(1)' }} />
+          <div onClick={() => setShowRegion(!showRegion)}  className={`relative ${isDarkMode ? 'bg-very-dark-blue' : 'bg-white' } rounded-md p-5 w-60 h-14 my-10 flex items-center justify-between cursor-pointer`}>
+            <h1 className={`${isDarkMode ? 'text-white' : 'text-very-dark-blue-text'} `}>{currentRegion}</h1>
+            {
+              isDarkMode ?  <img src={iconArrow} className="size-5" alt="arrow" style={{ filter: 'invert(1)' }} />
+              : <img src={iconArrow} className="size-5" alt="arrow"  />
+            }
             
-            <div className={`${showRegion ? '' : 'hidden'} absolute top-5 left-0  text-white rounded-lg my-10 bg-very-dark-blue w-60`}>
+            
+            <div className={`${showRegion ? '' : 'hidden'} absolute top-5 left-0 ${isDarkMode ? 'text-white bg-very-dark-blue' : 'bg-white text-very-dark-blue-text'}  rounded-lg my-10  w-60`}>
               <ul className="py-2 px-2 cursor-pointer ">
-                <li className="py-2 pl-2 hover:bg-very-dark-blue-bg" onClick={() => setCurrentRegion("Africa")}>Africa</li>
-                <li className="py-2 pl-2 hover:bg-very-dark-blue-bg" onClick={() => setCurrentRegion("America")}>America</li>
-                <li className="py-2 pl-2 hover:bg-very-dark-blue-bg" onClick={() => setCurrentRegion("Asia")}>Asia</li>
-                <li className="py-2 pl-2 hover:bg-very-dark-blue-bg" onClick={() => setCurrentRegion("Europe")}>Europe</li>
-                <li className="py-2 pl-2 hover:bg-very-dark-blue-bg" onClick={() => setCurrentRegion("Oceania")}>Oceania</li>
+                <li className={`py-2 pl-2 ${isDarkMode ? 'hover:bg-very-dark-blue-bg' : 'hover:bg-very-light-gray'}`} onClick={() => setCurrentRegion("Africa")}>Africa</li>
+                <li className={`py-2 pl-2 ${isDarkMode ? 'hover:bg-very-dark-blue-bg' : 'hover:bg-very-light-gray'}`} onClick={() => setCurrentRegion("America")}>America</li>
+                <li className={`py-2 pl-2 ${isDarkMode ? 'hover:bg-very-dark-blue-bg' : 'hover:bg-very-light-gray'}`} onClick={() => setCurrentRegion("Asia")}>Asia</li>
+                <li className={`py-2 pl-2 ${isDarkMode ? 'hover:bg-very-dark-blue-bg' : 'hover:bg-very-light-gray'}`} onClick={() => setCurrentRegion("Europe")}>Europe</li>
+                <li className={`py-2 pl-2 ${isDarkMode ? 'hover:bg-very-dark-blue-bg' : 'hover:bg-very-light-gray'}`} onClick={() => setCurrentRegion("Oceania")}>Oceania</li>
               </ul>
             </div>
           </div>
@@ -72,7 +74,7 @@ function App() {
             return (
               <div
                 key={index}
-                className="bg-very-dark-blue rounded-md shadow-md mb-5"
+                className={`${isDarkMode ? 'bg-very-dark-blue' : 'bg-white'} rounded-md shadow-md mb-5`}
               >
                 <img
                   src={country.flag}
@@ -80,18 +82,18 @@ function App() {
                   className="w-full h-56 object-cover rounded-t-md"
                 />
                 <div className="p-6">
-                  <h1 className="text-white font-bold text-lg mb-5">
+                  <h1 className={`${!isDarkMode ? 'text-very-dark-blue-text' : 'text-white'} font-bold text-lg mb-5`}>
                     {country.name}
                   </h1>
-                  <p className="text-white">
+                  <p className={`${isDarkMode ? 'text-white' : 'text-very-dark-blue-text'}`}>
                     <span className="font-semibold">Population:</span>{" "}
                     {country.population}
                   </p>
-                  <p className="text-white">
+                  <p className={`${isDarkMode ? 'text-white' : 'text-very-dark-blue-text'}`}>
                     <span className="font-semibold">Region:</span>{" "}
                     {country.region}
                   </p>
-                  <p className="text-white">
+                  <p className={`${isDarkMode ? 'text-white' : 'text-very-dark-blue-text'}`}>
                     <span className="font-semibold">Capital:</span>{" "}
                     {country.capital}
                   </p>

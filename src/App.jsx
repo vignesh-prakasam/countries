@@ -13,21 +13,22 @@ function App() {
     return (
       <>
         <button
-          className={`my-10 px-2 py-1 shadow-lg rounded-md w-20 ${
+          className={`my-10 px-4 py-2 shadow-lg rounded-md w-32 ${
             isDarkMode ? "bg-very-dark-blue text-white" : "bg-white text-very-dark-blue-text"
           }`}
           onClick={() => {
             setCurrentCountry(false);
           }}
         >
-          Back
+          <i className="fa-solid fa-arrow-left mr-2"></i>
+          {"Back"}
         </button>
         <div className="grid sm:grid-cols-2 grid-cols-1 gap-20">
           <div>
             <img
               src={currentCountry.flag}
               alt={currentCountry.name}
-              className="w-full h-80 object-cover rounded-md"
+              className="w-full min-h-80  object-cover rounded-md"
             />
           </div>
           <div>
@@ -108,16 +109,16 @@ function App() {
                 </p>
               </div>
             </div>
-            <div className="mt-10 flex sm:flex-row flex-col justify-start items-center gap-4">
-              <p
-                className={`text-left ${
+            <div className="mt-10 flex sm:flex-row flex-col  justify-start items-start gap-4 mb-16">
+              <h1
+                className={`text-left font-semibold text-nowrap ${
                   isDarkMode ? "text-white" : "text-very-dark-blue-text"
                 }`}
               >
-                <span className="font-semibold text-left">Border Countries:</span>
-              </p>
-              <div className="flex flex-wrap gap-2">
-                {currentCountry.borders.map((border, index) => {
+               Border Countries:
+              </h1>
+              <div className="flex flex-wrap gap-2 ">
+                { currentCountry.borders && currentCountry.borders.map((border, index) => {
                   return (
                     <button
                       key={index}

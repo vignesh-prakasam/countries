@@ -31,11 +31,11 @@ function App() {
 
   return (
     <>
-      <header className="flex flex-row justify-between items center bg-very-dark-blue px-4 py-8">
-        <h1 className="text-2xl text-white font-bold ml-5">
+      <header className={` flex flex-row justify-between items center ${isDarkMode ? 'bg-very-dark-blue text-white' : 'bg-white text-very-dark-blue-text'} px-4 py-8`}>
+        <h1 className="text-2xl  font-bold ml-5">
           Where in the world?
         </h1>
-        <button onClick={() => {setIsDarkMode(!isDarkMode)}} className="text-md text-white font-semibold mr-5"> { isDarkMode ? "Light Mode" : "Dark Mode" }</button>
+        <button onClick={() => {setIsDarkMode(!isDarkMode)}} className="text-md  font-semibold mr-5"> { isDarkMode ? "Light Mode" : "Dark Mode" }</button>
       </header>
       <main className={`${isDarkMode ? 'bg-very-dark-blue-bg': 'bg-very-light-gray'}  w-full  min-h-screen px-10`}>
         {/* filters */}
